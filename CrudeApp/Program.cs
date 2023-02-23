@@ -1,7 +1,14 @@
+using CrudeApp.Data;
+using CrudeApp.Data.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectioinString")));
+builder.Services.AddScoped<IUserServices, UserServices>();
+
 
 var app = builder.Build();
 
@@ -20,6 +27,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+//app.MapRazorPages();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Users}/{action=Index}/{id?}");
 
 app.Run();

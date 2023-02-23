@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CrudeApp.Model.User>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h1>User List</h1>
+
+<p>
+    <a asp-action="Create"class="btn btn-outline-primary">Add New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastActiveTime)
+            </th>
+            <th>
+                <label> Action</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateTime)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastActiveTime)
+                </td>
+
+               <td>
+                    @Html.ActionLink("Edit", "Create", new {item.Id,item.UserName,item.CreateTime, item.LastActiveTime}, new{@class="btn btn-success"}) 
+                    @Html.ActionLink("Delete", "Delete", new { item.Id },  new{@class="btn btn-danger"}) 
+                </td>
+                   
+            </tr>
+        }
+    </tbody>
+</table>
