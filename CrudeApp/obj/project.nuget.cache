@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "u3HiyjrKM8+hc+RJkG04/ji7HromDud4YqTR3eSsfyf3Bl5X6dCtS4YXnTh8LgRdo7kMy687D4czNDQxMFyN9Q==",
+  "success": true,
+  "projectFilePath": "D:\\Core_C#\\CrudeApp\\CrudeApp\\CrudeApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Shyam\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512"
+  ],
+  "logs": []
+}
