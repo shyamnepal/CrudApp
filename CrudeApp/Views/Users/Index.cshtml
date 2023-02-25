@@ -1,0 +1,151 @@
+﻿
+@model UserDto
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h1>User List</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.UserData.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserData.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserData.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserData.LastActiveTime)
+            </th>
+            <th>
+                <label> Action</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.UserList)
+        {
+                <tr>
+
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+
+                    <td>
+                    @Html.DisplayFor(modelItem => item.CreateTime)
+                    </td>
+
+                    <td>
+                    @Html.DisplayFor(modelItem => item.LastActiveTime)
+                    </td>
+
+                   <td>
+                    @Html.ActionLink("Edit", "EditUser", new {item.Id}, new{@class="btn btn-success"}) 
+                    @Html.ActionLink("Delete", "DeleteUser", new { item.Id },  new{@class="btn btn-danger"}) 
+                    </td>
+
+                </tr>
+        }
+    </tbody>
+</table>
+
+ <p>
+            <h1>Add a New Users </h1>
+             <a class="btn btn-outline-secondary "  asp-action="NewUser">NewUser</a>
+        </p>
+
+@using (Html.BeginForm("Create", "Users"))
+{
+    @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+            @Html.LabelFor(model => model.UserData.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                @Html.EditorFor(model => model.UserData.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserData.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+            @Html.LabelFor(model => model.UserData.CreateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                @Html.EditorFor(model => model.UserData.CreateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserData.CreateTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+                  <div class="form-group">
+            @Html.LabelFor(model => model.UserData.LastActiveTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                @Html.EditorFor(model => model.UserData.LastActiveTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserData.LastActiveTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+        @Html.HiddenFor(model=> model.UserData.Id)
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-Primary" />
+                </div>
+            </div>
+        
+        </div>
+}
+
+
+<!--
+
+<div class="row text"> 
+    <div class="col-md-8 offset-2">
+
+        <div class="row"> 
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                <div class="form-group">
+                    <label asp-for=UserData.UserName class="control-label"> </label>
+                    <input asp-for=UserData.UserName class="form-control" />
+                    <span asp-validation-for=UserData.UserName class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for=UserData.CreateTime class="control-label"> </label>
+                    <input asp-for=UserData.CreateTime class="form-control" />
+                    <span asp-validation-for=UserData.CreateTime class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for=UserData.LastActiveTime class="control-label"> </label>
+                    <input asp-for=UserData.LastActiveTime class="form-control" />
+                    <span asp-validation-for="UserData.LastActiveTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn-outline-success float-right"  />
+
+                </div>
+             </form>
+
+                </div>
+        </div>
+    </div>
+</div>
+-->
+
