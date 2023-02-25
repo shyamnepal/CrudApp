@@ -1,10 +1,15 @@
-﻿using CrudeApp.Model;
+﻿using CrudeApp.Models;
 
 namespace CrudeApp.Data.Services
 {
     public interface IUserServices
     {
-        Task<IEnumerable<User>> GetAll();
+        Task<UserDto> GetAll();
+         void CreateUser(UserDto UserData);
+
+        UserDto  GetUserById(int Id);
+
+        void DeleteById(int Id);
         
     }
 }

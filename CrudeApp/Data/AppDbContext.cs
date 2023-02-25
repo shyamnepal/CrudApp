@@ -1,4 +1,4 @@
-﻿using CrudeApp.Model;
+﻿using CrudeApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrudeApp.Data
