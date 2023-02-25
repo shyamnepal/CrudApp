@@ -1,0 +1,27 @@
+﻿version: '3.4'
+
+services:
+  crude:
+    container_name: app-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - 8002:80
+    environment: 
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=password@1234
+ 
+
+  crudapp:
+    image: ${DOCKER_REGISTRAY-}crudeapp
+    build:
+      context: .
+      dockerfile: CrudeApp/Dockerfile
+    ports:
+      - 8001:80
+    depends_on: 
+      - crude
+    environment: 
+      - DB_HOST=demoappdb
+      - DB_NAME=CrudeApp
+      - DB_SA_PASSWORD=password@1234
+ 

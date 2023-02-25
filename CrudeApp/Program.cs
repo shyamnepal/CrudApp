@@ -4,9 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Add database configuration
+var server = builder.Configuration["DB_HOST"] ?? "";
+//var port = builder.Configuration["DatabasePort"] ?? "";
+//var user = builder.Configuration["DatabaseUser"] ?? "";
+var password = builder.Configuration["DB_SA_PASSWORD"] ?? "";
+var database = builder.Configuration["DB_NAME"] ?? "";
+var connectionString = $"Server={server}; Initial-Catalog={database};User ID=sa;Password={password}";
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectioinString")));
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(connectionString));
 builder.Services.AddScoped<IUserServices, UserServices>();
 
 
