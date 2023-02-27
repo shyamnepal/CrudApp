@@ -62,14 +62,15 @@
 
  <p>
             <h1>Add a New Users </h1>
-             <a class="btn btn-outline-secondary "  asp-action="NewUser">NewUser</a>
+             <a class="btn btn-outline-secondary "  id="btn">AddUser</a>
         </p>
 
 @using (Html.BeginForm("Create", "Users"))
 {
     @Html.AntiForgeryToken()
+    
 
-        <div class="form-horizontal">
+        <div class="form-horizontal" id ="form">
 
             <hr />
            @Html.ValidationSummary(true, "", new { @class = "text-danger" }) 
@@ -101,12 +102,13 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-Primary" />
+                    <input type="submit" value="Create"  class="btn btn-primary" />
                 </div>
             </div>
         
         </div>
 }
+  <script src="~/js/custom.js" asp-append-version="true"></script>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

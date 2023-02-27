@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "l8QqKmqz3EARs1co+fIGPiZ/Hze0ZOZCOE6MrTa4bqU=",
+  "Hash": "AAtxY4hiUPQiLBLRX4znV3L+EQYzoxBYzMTvEWYxUqQ=",
   "Source": "CrudeApp",
   "BasePath": "_content/CrudeApp",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\Core_C#\\CrudeApp\\CrudeApp\\wwwroot\\js\\custom.js",
+      "SourceId": "CrudeApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Core_C#\\CrudeApp\\CrudeApp\\wwwroot\\",
+      "BasePath": "_content/CrudeApp",
+      "RelativePath": "js/custom.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\custom.js"
     },
     {
       "Identity": "D:\\Core_C#\\CrudeApp\\CrudeApp\\wwwroot\\js\\site.js",
