@@ -1,0 +1,42 @@
+networks:
+  crudeapplication: {}
+services:
+  crude:
+    container_name: app-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Express
+      SA_PASSWORD: password@1234
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      crudeapplication: {}
+    ports:
+    - published: 8002
+      target: 80
+  crudeapp:
+    build:
+      context: D:\Core_C#\CrudeApp
+      dockerfile: CrudeApp/Dockerfile
+    depends_on:
+      crude:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DB_HOST: localhost
+      DB_NAME: CrudeApp
+      DB_PORT: '8002'
+      DB_SA_PASSWORD: password@1234
+      DB_USER: SA
+    image: crudeapp
+    networks:
+      crudeapplication: {}
+    ports:
+    - published: 8001
+      target: 80
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\Shyam\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Shyam\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'

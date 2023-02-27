@@ -1,0 +1,61 @@
+networks:
+  crudeapplication: {}
+services:
+  crude:
+    container_name: app-db
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: password@1234
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      crudeapplication: {}
+    ports:
+    - published: 8002
+      target: 80
+  crudeapp:
+    build:
+      context: D:\Core_C#\CrudeApp
+      dockerfile: CrudeApp/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: CrudeApp
+      target: base
+    container_name: CrudeApp_1
+    depends_on:
+      crude:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DB_HOST: localhost
+      DB_NAME: CrudeApp
+      DB_PORT: '8002'
+      DB_SA_PASSWORD: password@1234
+      DB_USER: sa
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: crudeapp:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/net6.0/CrudeApp.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      crudeapplication: {}
+    ports:
+    - published: 8001
+      target: 80
+    - target: 80
+    - target: 443
+    tty: true
+    volumes:
+    - D:\Core_C#\CrudeApp\CrudeApp:/app:rw
+    - C:\Users\Shyam\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\Shyam\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Shyam\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\Shyam\.nuget\packages:/root/.nuget/packages:ro
+    - D:\Core_C#\CrudeApp:/src:rw
+version: '3.4'

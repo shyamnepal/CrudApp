@@ -1,6 +1,7 @@
 ﻿using CrudeApp.Data.Services;
 using CrudeApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace CrudeApp.Controllers
 {
@@ -23,12 +24,16 @@ namespace CrudeApp.Controllers
         {
             return View();
         }
+       
         [HttpPost]
-        public async Task<IActionResult> Create(UserDto u)
+        public async Task<IActionResult> Create([Bind(include:"UserData")] UserDto u)
         {
-            if (u.UserData==null)
+            ModelState.Remove("UserList");
+            if (!ModelState.IsValid)
             {
-                return View("Index");
+                var data = await _service.GetAll();
+
+                return View("Index",data);
             }
             _service.CreateUser(u);
             return RedirectToAction("Index");

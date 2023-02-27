@@ -1,0 +1,16 @@
+services:
+  crudeapp:
+    build:
+      context: D:\Core_C#\CrudeApp
+      dockerfile: CrudeApp/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: crudeapp
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\Shyam\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Shyam\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'
