@@ -15,19 +15,25 @@ namespace CrudeApp.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAll();
+            if (data != null)
+            {
+                return View(data);
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
 
-            return View(data);
+           
         }
 
        
-        public async Task<IActionResult> NewUser()
-        {
-            return View();
-        }
+      
        
         [HttpPost]
         public async Task<IActionResult> Create([Bind(include:"UserData")] UserDto u)
         {
+            
             ModelState.Remove("UserList");
             if (!ModelState.IsValid)
             {
@@ -41,18 +47,39 @@ namespace CrudeApp.Controllers
 
         public async Task<IActionResult> EditUser(int Id)
         {
-            var GetById = _service.GetUserById(Id);
-            return View("Index",GetById);
+            if (Id != null || Id !=0)
+            {
+                
+                var GetById = _service.GetUserById(Id);
+                if (GetById != null)
+                {
+                    return View("Index", GetById);
+                }
+                else
+                {
+                    throw new ArgumentNullException(nameof(GetById));
+                }
+               
+            }else
+            {
+                throw new ArgumentNullException(nameof(Id));
+                
+            }
+            
         }
         public async Task<IActionResult> DeleteUser(int Id)
         {
-            if (Id != null)
+            if (Id != 0)
             {
                 _service.DeleteById(Id);
-               
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(Id));
             }
 
-            return RedirectToAction("Index");
+           
 
         }
     }
