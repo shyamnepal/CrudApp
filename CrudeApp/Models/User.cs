@@ -5,7 +5,8 @@ namespace CrudeApp.Models
 {
     public class User
     {
-        public int Id { get; set; }
+
+        public int? Id { get; set; } = null!;
         [Required(ErrorMessage="User Name is required")]
         public string UserName { get; set; } = string.Empty;
 
