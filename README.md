@@ -1,6 +1,15 @@
 
 # Crud App
-Application is all about creating, reading, updating, and deleting the user. the first user runs the application and shows the user on the top of the page in the table below the table there is a button when the button is pressed the user shows the form to input the user data. After completing the form user need to submit the data and finally, the data show in the above table. 
+Application is all about creating, reading, updating, and deleting the user. the first user runs the application and shows the user on the top of the page in the table below the table there is a button when the button is pressed the user shows the form to input the user data. After completing the form user need to submit the data and finally, the data show in the above table.
+
+I have also host this samll application on web server which link is give below:\
+[Click me ](https://shyam123.bsite.net/)
+
+## Screenshot Of Application
+
+![crude](https://user-images.githubusercontent.com/61022806/222177513-71b9fff3-3342-4f62-a14d-c19dce97fea9.PNG)
+
+![crude1](https://user-images.githubusercontent.com/61022806/222177524-ed85b4d1-c77b-4239-aa3c-69ac7a40287d.PNG)
 
 
 ## Documentation
@@ -59,6 +68,84 @@ Install dependencies
 
 ```bash
   dotnet run
+```
+
+## SQL Query
+
+Create database 
+
+```bash
+  Create database crude;
+```
+
+Create Users Table
+```bash
+  CREATE TABLE Users(
+Id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+UserName NVARCHAR(50) NOT NULL,
+CreateTime DATETIME NOT NULL,
+LastActiveTime DATETIME NOT NULL DEFAULT('2000-1-1 0:0:0')
+);
+```
+
+Create Orders Table 
+ ```bash
+CREATE TABLE Orders(
+Id INT NOT NULL,
+UserId INT NOT NULL,
+SupplyName NVARCHAR(50) NOT NULL,
+UnitCost DECIMAL(18,2) NOT NULL,
+UnitPrice DECIMAL(18,2) NOT NULL,
+Markup DECIMAL(18,2) NOT NULL,
+Qty int NOT NULL,
+TotalPrice Decimal(18,2) NOT NULL,
+CreateTime DATETIME NOT NULL,
+CONSTRAINT FK_UserID FOREIGN KEY (UserId) REFERENCES Users (Id)
+);
+```
+
+Insert Value in Users Table 
+
+```bash
+INSERT INTO Users(UserName,CreateTime,LastActiveTime) 
+VALUES ('Shyam Sundar Nepal','2023-2-22 9:46:0','2023-2-21 9:46:0');
+```
+
+Insert Value in Orders Table 
+
+```bash
+INSERT INTO Orders(Id,UserId,SupplyName,UnitCost,UnitPrice,Markup,Qty,TotalPrice,CreateTime)
+VALUES (1,1,'keyboard',700.43,900.43,200.00,2,1800.86,'2023-2-22 9:45:0');
+```
+update the UserName from Users Table
+```bash
+UPDATE Users 
+SET UserName='Santosh Gajurel'
+WHERE Id=1;
+```
+
+Update CreateTime from Orders table 
+```bash
+UPDATE Orders 
+SET CreateTime='2021-1-1 0:0:0'
+WHERE Id=1;
+```
+Query qty of items that are ordered by each user
+```bash
+SELECT * FROM Orders o 
+JOIN  Users u
+on o.UserId=u.Id;
+```
+
+Update LastActiveTime of each user with the CreateTime of the last order the user has created
+``` bash
+UPDATE Users  
+SET Users.LastActiveTime=(
+SELECT  MAX(O.CreateTime) AS Max_time
+FROM Orders O
+JOIN Users U
+ON U.Id=O.UserId
+group by O.UserId);
 ```
 
 
