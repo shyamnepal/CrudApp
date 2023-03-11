@@ -1,5 +1,7 @@
 version: '3.4'
 
+networks:
+  democrudapp:
 services:
   crude:
     container_name: crude
@@ -8,8 +10,11 @@ services:
       - "1433:1433"
     environment: 
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "Password@1234"
-      MSSQL_PID: Express
+      MSSQL_SA_PASSWORD: "Password@1234"
+      UserID: "sa"
+      
+    networks:
+      - democrudapp
 
 
   crudeapp:
@@ -21,9 +26,6 @@ services:
       - "8001:80"
     depends_on: 
       - crude
-    environment: 
-      DB_HOST: "crude"
-      DB_NAME: "CrudeApp"
-      DB_PORT: "1433"
-      DB_SA_PASSWORD: "Password@1234"
-      DB_USER: "SA"
+
+    networks:
+      - democrudapp

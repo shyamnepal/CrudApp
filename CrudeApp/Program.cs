@@ -10,12 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 //var user = builder.Configuration["DB_USER"] ?? "";
 //var password = builder.Configuration["DB_SA_PASSWORD"] ?? "";
 //var database = builder.Configuration["DB_NAME"] ?? "";
+//var connectionString = "Server=sql.bsite.net\\MSSQL2016;database=shyam123_; User ID=shyam123_; Password=shyam123;TrustServerCertificate=True;";
+//var connectionString = "Data Source=localhost,1433;Initial Catalog=crud; User ID=sa; Password=Password@1234;TrustServerCertificate=True;";
 var connectionString = "Server=localhost;database=crude;trusted_connection=true; TrustServerCertificate=True;Integrated Security=true;";
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(connectionString));
 builder.Services.AddScoped<IUserServices, UserServices>();
-
+builder.Services.AddScoped<IOrderServices, OrderServices>();
 
 var app = builder.Build();
 

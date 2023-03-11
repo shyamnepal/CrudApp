@@ -9,13 +9,13 @@
 
 
 <table class="table">
-    <thead>
+    <thead class="thead-dark">
         <tr>
 
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.UserData.Id)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.UserData.UserName)
             </th>
             <th>
@@ -53,6 +53,7 @@
                    <td>
                     @Html.ActionLink("Edit", "EditUser", new {item.Id}, new{@class="btn btn-success"}) 
                     @Html.ActionLink("Delete", "DeleteUser", new { item.Id },  new{@class="btn btn-danger"}) 
+                   
                     </td>
 
                 </tr>
@@ -62,7 +63,7 @@
 
  <p>
             <h1>Add a New Users </h1>
-             <a class="btn btn-outline-secondary "  id="btn">AddUser</a>
+             <a class="btn btn-outline-secondary "  id="btn">Add User</a>
         </p>
 
 @using (Html.BeginForm("Create", "Users"))
@@ -99,6 +100,7 @@
                 </div>
 
         @Html.HiddenFor(model=> model.UserData.Id)
+         <br>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -107,7 +109,13 @@
             </div>
         
         </div>
+
+
 }
+<br />
+             <div>
+                 <button class="btn btn-warning""" type="button" onclick="location.href='@Url.Action("Order","Orders")'">Add Order</button>
+         </div>
 
   <script src="~/js/custom.js" asp-append-version="true"></script>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

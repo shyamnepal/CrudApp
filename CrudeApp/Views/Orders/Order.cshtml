@@ -1,0 +1,203 @@
+﻿
+@model OrderDto
+
+@{
+    ViewData["Title"] = "List of User Orders";
+}
+
+<h1>User List</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.UserOrder.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserOrder.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserOrder.SupplyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserOrder.UnitCost)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.UserOrder.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserOrder.Markup)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserOrder.Qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserOrder.TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserOrder.CreateTime)
+            </th>
+            <th>
+                <label> Action</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderList)
+        {
+                    <tr>
+
+                        <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                        </td>
+
+                        <td>
+                    @Html.DisplayFor(modelItem => item.SupplyName)
+                        </td>
+
+                        <td>
+                    @Html.DisplayFor(modelItem => item.UnitCost)
+                        </td>
+
+                            <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                            </td>
+                            <td>
+                    @Html.DisplayFor(modelItem => item.Markup)
+                            </td>
+
+                            <td>
+                    @Html.DisplayFor(modelItem => item.Qty)
+                            </td>
+
+                            <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                            </td>
+
+                                <td>
+                    @Html.DisplayFor(modelItem => item.CreateTime)
+                                </td>
+                       <td>
+                    @Html.ActionLink("Edit", "EditOrder", new {item.Id}, new{@class="btn btn-success"}) 
+                    @Html.ActionLink("Delete", "DeleteOrder", new { item.Id },  new{@class="btn btn-danger"}) 
+
+                        </td>
+
+                    </tr>
+        }
+    </tbody>
+</table>
+
+
+
+ <p>
+            <h1>Add Order </h1>
+             <a class="btn btn-outline-secondary "  id="btn">Add Order</a>
+        </p>
+
+@using (Html.BeginForm("CreateOrder", "Orders"))
+{
+    @Html.AntiForgeryToken()
+
+
+            <div class="form-horizontal" id ="form">
+
+                <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" }) 
+                <div class="form-group">
+            @Html.LabelFor(model => model.UserOrder.SupplyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                @Html.EditorFor(model => model.UserOrder.SupplyName, new { htmlAttributes = new { @class = "form-control"   } })
+                @Html.ValidationMessageFor(model => model.UserOrder.SupplyName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+            @Html.LabelFor(model => model.UserOrder.UnitCost, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                @Html.EditorFor(model => model.UserOrder.UnitCost, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserOrder.UnitCost, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                       <div class="form-group">
+            @Html.LabelFor(model => model.UserOrder.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                @Html.EditorFor(model => model.UserOrder.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserOrder.UnitPrice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                                      <div class="form-group">
+            @Html.LabelFor(model => model.UserOrder.Markup, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                @Html.EditorFor(model => model.UserOrder.Markup, new { htmlAttributes = new { @class = "form-control"   } })
+                @Html.ValidationMessageFor(model => model.UserOrder.Markup, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+            @Html.LabelFor(model => model.UserOrder.Qty, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                @Html.EditorFor(model => model.UserOrder.Qty, new { htmlAttributes = new { @class = "form-control" } })
+               
+                @Html.ValidationMessageFor(model => model.UserOrder.Qty, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                          <div class="form-group">
+            @Html.LabelFor(model => model.UserOrder.TotalPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserOrder.TotalPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserOrder.TotalPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                             <div class="form-group">
+            @Html.LabelFor(model => model.UserOrder.CreateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                @Html.EditorFor(model => model.UserOrder.CreateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserOrder.CreateTime, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                                              <div class="form-group">
+            @Html.LabelFor(model => model.UserOrder.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                @Html.DropDownListFor(model=> model.UserOrder.UserId, ViewBag.UserList as SelectList, "--select the user--", new { htmlAttributes = new { @class = "form-control" } })
+                <br/>
+                @Html.ValidationMessageFor(model => model.UserOrder.UserId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+            @Html.HiddenFor(model=> model.UserOrder.Id)
+        
+           
+       
+             <br>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create"  class="btn btn-primary" />
+                    </div>
+                </div>
+
+            </div>
+            <br />
+
+     
+    
+
+}
+<div>
+             <button class="btn btn-warning" type="button" onclick="location.href='@Url.Action("Index","Users")'">Add User</button>
+     </div>
+
+  <script src="~/js/custom.js" asp-append-version="true"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
