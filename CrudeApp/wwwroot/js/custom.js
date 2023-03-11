@@ -6,13 +6,16 @@ function getCurrentUrl() {
 }
 
 const url = getCurrentUrl()
-if (url == 'https://shyam123.bsite.net/') {
+if (url == 'https://shyam123.bsite.net/' || url =='https://shyam123.bsite.net/Orders/Order')
+{
+   
+    
     window.onload = (event) => {
         const form = document.getElementById('form');
 
 
         if (form.style.display === 'none') {
-            // 👇️ this SHOWS the form
+            // 👇 this SHOWS the form
             form.style.display = 'block';
         } else {
             form.style.display = 'none'
@@ -31,6 +34,10 @@ if (url == 'https://shyam123.bsite.net/') {
         }
     }
 }
+
+
+
+
 
 
 
