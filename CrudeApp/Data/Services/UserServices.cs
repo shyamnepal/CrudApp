@@ -21,8 +21,9 @@ namespace CrudeApp.Data.Services
                 var AllUser = new UserDto()
                 {
                     UserList = _context.Users.ToList()
+                    
                 };
-
+              
                 return AllUser;
             }catch(Exception ex)
             {
